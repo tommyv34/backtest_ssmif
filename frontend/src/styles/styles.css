@@ -1,0 +1,12 @@
+.appBar{
+    background-color: lightgray !important;
+}
+
+.nav-button, .button{
+    color:maroon !important;
+    background-color: whitesmoke !important;
+}
+
+.nav-button{
+    margin: 5px !important;
+}
