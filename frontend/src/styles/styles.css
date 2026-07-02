@@ -10,3 +10,57 @@
 .nav-button{
     margin: 5px !important;
 }
+
+.button{
+    margin: 5px !important;
+}
+
+.modal {
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+
+    border: 1px solid gray;
+    border-radius: 4px;
+    background-color: white;
+
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal_text_input, .modal_select{
+    margin: 5px !important;
+}
+.modal_text_input .MuiOutlinedInput-root fieldset {
+    border-color: gray;
+}
+.modal_text_input .MuiOutlinedInput-root:hover fieldset {
+    border-color: maroon;
+}
+.modal_text_input .MuiOutlinedInput-root.Mui-focused fieldset {
+    border-color: maroon;
+}
+.modal_text_input .MuiInputLabel-root {
+    color: gray;
+}
+.modal_text_input .MuiInputLabel-root.Mui-focused {
+    color: maroon;
+}
+.modal_text_input .MuiInputBase-input {
+    color: gray;
+}

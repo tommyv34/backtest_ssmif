@@ -13,6 +13,13 @@ function NavBar() {
         <Button 
           className="nav-button" 
           component={Link}
+          to="/"
+        >
+          Home
+        </Button>
+        <Button 
+          className="nav-button" 
+          component={Link}
           to="/trades"
         >
           Trades
