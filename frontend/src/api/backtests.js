@@ -40,9 +40,24 @@ export async function getBacktestDataById(id){
     }
 }
 
-export async function runBacktest(id){
+export async function runBacktest(id, strategy, ticker, initialCapital, startDate, endDate){
+    const backtest = {
+        id, 
+        strategy, 
+        ticker, 
+        initialCapital, 
+        startDate, 
+        endDate
+    }
     try{
-        const response = await fetch(`http://localhost:5000/run-backtest/${id}`, {method: "POST"});
+        const response = await fetch(`http://localhost:5000/run-backtest/${id}`, 
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(backtest),
+            });
         
         if(!response.ok) throw new Error ("Failed to run backtest");
 

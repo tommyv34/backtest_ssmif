@@ -8,6 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Alert from '@mui/material/Alert';
+import InputLabel from '@mui/material/InputLabel';
 
 ReactModal.setAppElement('#root');
 
@@ -66,6 +67,8 @@ function NewBackTestModal(props){
         props.onClose();
     }
 
+    const strategies = ["BuyHold"];
+
     return(
         <ReactModal
         isOpen={props.isOpen}
@@ -83,28 +86,32 @@ function NewBackTestModal(props){
                 onChange={(e) => setName(e.target.value)}
                 ></TextField>
 
-                <FormControl>
+                <FormControl className='modal_select'>
+                    <InputLabel>Strategy</InputLabel>
                     <Select
                     id="strategy"
                     label="Strategy"
                     className='modal_select'
                     value={strategy}
+                    
                     onChange={(e) => setStrategy(e.target.value)}
                     >
-                        <MenuItem></MenuItem>
+                        {strategies.map((strategy)=>(
+                            <MenuItem key={strategy} value={strategy}>{strategy}</MenuItem>
+                        ))}                 
                     </Select>
                 </FormControl>
 
-                    <TextField
-                    id="ticker"
-                    label="Ticker"
-                    className='modal_text_input'
-                    value={ticker}
-                    onChange={(e) => setTicker(e.target.value)}
-                    >
-                    </TextField>
+                <TextField
+                id="ticker"
+                label="Ticker"
+                className='modal_text_input'
+                value={ticker}
+                onChange={(e) => setTicker(e.target.value)}
+                >
+                </TextField>
 
-                <div>
+                <div className='date-row'>
                     <TextField
                     id="start_date"
                     label="Start Date"

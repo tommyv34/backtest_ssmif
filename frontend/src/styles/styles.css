@@ -16,22 +16,21 @@
 }
 
 .modal {
+    position: absolute;
     top: 50%;
     left: 50%;
-    right: auto;
-    bottom: auto;
-    margin-right: -50%;
     transform: translate(-50%, -50%);
+
     width: 50%;
-
+    background: white;
     border: 1px solid gray;
-    border-radius: 4px;
-    background-color: white;
+    border-radius: 6px;
 
-    padding: 10px;
+    padding: 20px;
+
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .overlay {
@@ -43,8 +42,9 @@
     align-items: center;
 }
 
-.modal_text_input, .modal_select{
+.modal_text_input, .modal_select {
     margin: 5px !important;
+    width: 100%;
 }
 .modal_text_input .MuiOutlinedInput-root fieldset {
     border-color: gray;
@@ -63,4 +63,46 @@
 }
 .modal_text_input .MuiInputBase-input {
     color: gray;
+}
+
+.modal_select .MuiOutlinedInput-notchedOutline {
+    border-color: gray !important;
+}
+.modal_select:hover .MuiOutlinedInput-notchedOutline {
+    border-color: maroon !important;
+}
+.modal_select.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: maroon !important;
+}
+.modal_select .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: maroon !important;
+}
+.modal_select .MuiInputLabel-root {
+    color: gray !important;
+}
+.modal_select .MuiInputLabel-root.Mui-focused {
+    color: maroon !important;
+}
+.modal_text_input .MuiInputBase-input,
+.modal_field .MuiSelect-select {
+    color: black;
+}
+.modal_text_input .MuiInputLabel-root,
+.modal_field .MuiInputLabel-root {
+    color: gray;
+}
+
+.date-row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+.modal_text_input input[type="date"] {
+    padding-top: 40px;
+}
+.date-row .MuiInputLabel-root {
+    transform: translate(14px, 16px) scale(1) !important;
+}
+.date-row .MuiInputLabel-shrink {
+    transform: translate(14px, 16px) scale(1) !important;
 }

@@ -37,7 +37,7 @@ function Backtest() {
 
     async function handleRun(id){
         setRunning(true);
-        await runBacktest(id);
+        await runBacktest(id, backtest[2], backtest[3], backtest[4], backtest[5], backtest[6]);
         const data = await getBacktestDataById(id);
         setData(data);
         setRunning(false);
