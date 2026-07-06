@@ -1,12 +1,11 @@
 from flask import request, jsonify, Blueprint
 from config import get_connection
 
-new_backtest_bp = Blueprint("new-backtests", __name__)
+new_backtest_bp = Blueprint("new-backtest", __name__)
 
 @new_backtest_bp.route("/new-backtest", methods=["POST"])
 def new_backtest():
     data = request.get_json()
-    print(data)
 
     try:
         conn = get_connection()
