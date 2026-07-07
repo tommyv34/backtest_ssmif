@@ -48,7 +48,6 @@ function Home() {
 
     return (
         <div>
-            <Typography variant="h3">Home</Typography>
             <Button 
                 onClick={handleNewBT}
                 className="button"
@@ -61,7 +60,7 @@ function Home() {
                 onSuccess={() => {setNewBT(false); loadBacktests();}}
             />
 
-            <Typography variant="h5">Backtests</Typography>
+            <Typography sx={{p:1}} variant="h5">Backtests</Typography>
             {loadingBacktests ? (
                 <Typography variant="body1">
                     Loading backtests...

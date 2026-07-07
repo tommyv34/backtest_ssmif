@@ -17,20 +17,6 @@ function NavBar() {
         >
           Home
         </Button>
-        <Button 
-          className="nav-button" 
-          component={Link}
-          to="/trades"
-        >
-          Trades
-        </Button>
-        <Button 
-          className="nav-button"
-          component={Link}
-          to="/metrics"
-        >
-          Metrics
-        </Button>
       </ToolBar>
     </AppBar>
   );

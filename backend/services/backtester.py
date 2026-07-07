@@ -1,6 +1,6 @@
 import yfinance as yf
 from datetime import datetime
-
+import json
 
 from config import get_connection
 from backtesting.engine import BacktestEngine
@@ -22,7 +22,7 @@ def run_new_backtest(id, strategy, ticker, initialCapital, startDate, endDate):
         ).strftime("%Y-%m-%d")
         df = yf.download(ticker, start=startDate, end=endDate)
         df.columns = df.columns.droplevel(1)
-        engine = BacktestEngine(strategy)
+        engine = BacktestEngine(strategy, startDate, endDate)
         results = engine.run(df, initialCapital)
         
         conn = get_connection()
@@ -30,12 +30,23 @@ def run_new_backtest(id, strategy, ticker, initialCapital, startDate, endDate):
         cur.execute(
             """
             INSERT INTO backtests_data
-            (id, total_return)
-            VALUES (%s, %s)
+            (id, 
+            total_return, 
+            history, 
+            profit_loss, 
+            annualized_return,
+            max_drawdown,
+            win_rate)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
             """,
             (
                 id,
                 float(results.total_return),
+                json.dumps(results.trades),
+                float(results.profit_loss),
+                float(results.annualized_return),
+                float(results.max_drawdown),
+                float(results.win_rate)
             )
         )
         conn.commit()
