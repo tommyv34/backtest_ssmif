@@ -1,14 +1,36 @@
 from flask import jsonify, Blueprint, request
 from config import get_connection
 from services.backtester import run_new_backtest
+from marketdata import MarketData
+from ingest import ingest
 
 run_backtest_bp = Blueprint("run-backtest", __name__)
 
 @run_backtest_bp.route("/run-backtest/<int:id>", methods=["POST"])
-def run_backtest(id):
+def run_backtest(id):   
+    market_data = MarketData() 
     conn = None
     try:
         body = request.get_json()
+        strategy = body.get("strategy")
+        ticker = body.get("ticker")
+        initialCapital = body.get("initialCapital")
+        startDate = body.get("startDate")
+        endDate = body.get("endDate")
+
+
+
+        if not market_data.has_all_dates(
+            ticker,
+            startDate, 
+            endDate
+            ):
+            ingest(
+                ticker,
+                startDate,
+                endDate
+                )
+            
         conn = get_connection()
         cur = conn.cursor()
         cur.execute(
@@ -28,11 +50,11 @@ def run_backtest(id):
         else:
             data = run_new_backtest(
                 id,
-                body.get("strategy"),
-                body.get("ticker"),
-                body.get("initialCapital"),
-                body.get("startDate"),
-                body.get("endDate")
+                strategy,
+                ticker,
+                initialCapital,
+                startDate,
+                endDate
             )
     finally:
         if conn:

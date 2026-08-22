@@ -142,10 +142,10 @@ function Backtest() {
                 : (data[2].map((trade, i) => (
                     <Card key={i} sx={{mt:2, width:180}}>
                         <Stack direction="column" sx={{p:1}} spacing={1} alignitems="center">
-                            <Typography><strong>{trade.Action}</strong></Typography>
-                            <Typography variant="body1">Date: {new Date(trade.Date).toLocaleDateString()}</Typography>
-                            <Typography>{trade.Action} Price: ${Math.round(trade.Price*100)/100}</Typography>
-                            <Typography>Quantity: {trade.Quantity} shares</Typography>
+                            <Typography><strong>{trade.action}</strong></Typography>
+                            <Typography variant="body1">Date: {new Date(trade.date).toLocaleDateString()}</Typography>
+                            <Typography>{trade.Action} Price: ${Math.round(trade.price*100)/100}</Typography>
+                            <Typography>Quantity: {trade.quantity} shares</Typography>
                         </Stack>
                     </Card>                
                 )))}

@@ -3,8 +3,7 @@ from datetime import datetime
 import json
 
 from config import get_connection
-from backtesting.engine import BacktestEngine
-from backtesting.strategy import BuyHoldStrategy
+from backtesting.backtesting_cpp import Engine, BuyHoldStrategy, MarketData
 
 def run_new_backtest(id, strategy, ticker, initialCapital, startDate, endDate):
     conn = None
@@ -15,18 +14,46 @@ def run_new_backtest(id, strategy, ticker, initialCapital, startDate, endDate):
         startDate = datetime.strptime(
             startDate,
             "%a, %d %b %Y %H:%M:%S %Z"
-        ).strftime("%Y-%m-%d")
+        )
         endDate = datetime.strptime(
             endDate,
             "%a, %d %b %Y %H:%M:%S %Z"
-        ).strftime("%Y-%m-%d")
-        df = yf.download(ticker, start=startDate, end=endDate)
+        )
+        df = yf.download(ticker, start=startDate.strftime("%Y-%m-%d"), end=endDate.strftime("%Y-%m-%d"))
         df.columns = df.columns.droplevel(1)
-        engine = BacktestEngine(strategy, startDate, endDate)
-        results = engine.run(df, initialCapital)
-        
+
+        engine = Engine(strategy, startDate, endDate)
+
+        market_data = []
+
+        for index, row in df.iterrows():
+            data = MarketData()
+
+            data.date = index.to_pydatetime()
+            data.open = float(row["Open"])
+            data.high = float(row["High"])
+            data.low = float(row["Low"])
+            data.close = float(row["Close"])
+            data.volume = float(row["Volume"])
+
+            market_data.append(data)
+
+        results = engine.run(market_data, initialCapital)   
+
         conn = get_connection()
         cur = conn.cursor()
+        trades = []
+
+        for trade in results.trades:
+            trades.append({
+                "action": trade.action,
+                "cash": float(trade.cash),
+                "date": trade.date.isoformat(),
+                "portfolio_value": float(trade.portfolio_value),
+                "price": float(trade.price),
+                "quantity": float(trade.quantity),
+                "shares": float(trade.shares)
+            })
         cur.execute(
             """
             INSERT INTO backtests_data
@@ -42,7 +69,7 @@ def run_new_backtest(id, strategy, ticker, initialCapital, startDate, endDate):
             (
                 id,
                 float(results.total_return),
-                json.dumps(results.trades),
+                json.dumps(trades),
                 float(results.profit_loss),
                 float(results.annualized_return),
                 float(results.max_drawdown),
