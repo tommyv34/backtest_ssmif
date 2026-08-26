@@ -61,22 +61,34 @@ function Backtest() {
                     alignitems="center"
                 >
                     <Typography sx={{ lineHeight: 1, display: "flex", alignItems: "center" }} variant="body1">
-                        <strong>Name: </strong>{backtest[1]}</Typography>
+                        <strong>Name:</strong>
+                        <span style={{ marginLeft: "4px" }}>{backtest[1]}</span>
+                        </Typography>
 
                     <Typography sx={{ lineHeight: 1, display: "flex", alignItems: "center" }} variant="body1">
-                        <strong>Strategy: </strong>{backtest[2]}</Typography>
+                        <strong>Strategy:</strong>
+                        <span style={{ marginLeft: "4px" }}>{backtest[2]}</span>
+                        </Typography>
 
                     <Typography sx={{ lineHeight: 1, display: "flex", alignItems: "center" }} variant="body1">
-                        <strong>Ticker: </strong>{backtest[3]}</Typography>
+                        <strong>Ticker:</strong>
+                        <span style={{ marginLeft: "4px" }}>{backtest[3]}</span>
+                        </Typography>
 
                     <Typography sx={{ lineHeight: 1, display: "flex", alignItems: "center" }} variant="body1">
-                        <strong>Initial Capital: </strong>${Number(backtest[4]).toLocaleString()}</Typography>
+                        <strong>Initial Capital:</strong>
+                        <span style={{ marginLeft: "4px" }}>${Number(backtest[4]).toLocaleString()}</span>
+                        </Typography>
 
                     <Typography sx={{ lineHeight: 1, display: "flex", alignItems: "center" }} variant="body1">
-                        <strong>Start Date: </strong>{new Date(backtest[5]).toLocaleDateString()}</Typography>
+                        <strong>Start Date:</strong>
+                        <span style={{ marginLeft: "4px" }}>{new Date(backtest[5]).toLocaleDateString()}</span>
+                        </Typography>
 
                     <Typography sx={{ lineHeight: 1, display: "flex", alignItems: "center" }} variant="body1">
-                        <strong>End Date: </strong>{new Date(backtest[6]).toLocaleDateString()}</Typography>
+                        <strong>End Date:</strong>
+                        <span style={{ marginLeft: "4px" }}>{new Date(backtest[6]).toLocaleDateString()}</span>
+                        </Typography>
 
                     {!exists && (
                         <IconButton

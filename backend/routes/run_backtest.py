@@ -18,18 +18,7 @@ def run_backtest(id):
         startDate = body.get("startDate")
         endDate = body.get("endDate")
 
-
-
-        if not market_data.has_all_dates(
-            ticker,
-            startDate, 
-            endDate
-            ):
-            ingest(
-                ticker,
-                startDate,
-                endDate
-                )
+        market_data.ensure_data(ticker, startDate, endDate)
             
         conn = get_connection()
         cur = conn.cursor()
